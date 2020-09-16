@@ -5,13 +5,14 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 
 import { Background, Container, Content } from './style';
+import { Form } from '@unform/web';
 
 const SignIn: React.FunctionComponent = () => (
   <Container>
     <Content>
       <img src={logoImg} alt="GoBarber" />
 
-      <form>
+      <Form onSubmit={() => {}}>
         <h1>Faça seu Logon</h1>
         <Input name="email" icon={FiMail} placeholder="E-mail" />
         <Input
@@ -22,7 +23,7 @@ const SignIn: React.FunctionComponent = () => (
         />
         <Button type="submit">Entrar</Button>
         <a href="forgot">Esqueci a senha</a>
-      </form>
+      </Form>
 
       <a href="login">
         <FiLogIn />
