@@ -40,7 +40,7 @@ const SignUp: React.FunctionComponent = () => {
       <Content>
         <img src={logoImg} alt="GoBarber" />
 
-        <Form onSubmit={handleSubmit}>
+        <Form ref= {formRef} onSubmit={handleSubmit}>
           <h1>Faça seu Cadastro</h1>
           <Input name="name" icon={FiUser} placeholder="Nome" />
           <Input name="email" icon={FiMail} placeholder="E-mail" />

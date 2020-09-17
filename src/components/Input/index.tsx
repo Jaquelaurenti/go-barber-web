@@ -21,9 +21,6 @@ const Input: React.FC<InputProps> = ({ name, icon: Icon, ...rest }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [isField, setIsField] = useState(false);
 
-  // TODO >> não esta carregando o error, sempre vem com Undefinec
-  console.log('Error:' + error);
-
   const handleInputBlur = useCallback(() => {
     setIsFocused(true);
   }, []);
