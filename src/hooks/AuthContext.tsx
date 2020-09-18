@@ -13,7 +13,8 @@ interface SigInCredentials {
 }
 interface AuthContextData {
   user: string;
-  sigIn(credentials: SigInCredentials): Promise<void>;
+  signIn(credentials: SigInCredentials): Promise<void>;
+  signOut(): void;
 }
 
 export const AuthContext = createContext<AuthContextData>(
@@ -32,7 +33,13 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
     return {} as AuthState;
   });
 
-  const sigIn = useCallback(async ({ email, password }) => {
+  const signOut = useCallback(() => {
+    localStorage.removeItem('@GoBarber:token');
+    localStorage.removeItem('@GoBarber:user');
+    setData({} as AuthState);
+  }, []);
+
+  const signIn = useCallback(async ({ email, password }) => {
     const response = await api.post('sessions', {
       email,
       password,
@@ -47,7 +54,7 @@ export const AuthProvider: React.FunctionComponent = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user: data.user, sigIn }}>
+    <AuthContext.Provider value={{ user: data.user, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );

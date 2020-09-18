@@ -7,7 +7,7 @@ import { FormHandles } from '@unform/core';
 import logoImg from '../../assets/logo.svg';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
-import { useAuth } from '../../context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 import { Background, Container, Content } from './style';
 import getValidationErros from '../../utils/getValidationErrors';
@@ -20,7 +20,7 @@ interface SignInFormData {
 const SignIn: React.FunctionComponent = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { sigIn } = useAuth();
+  const { signIn } = useAuth();
 
   const handleSubmit = useCallback(
     async (data: SignInFormData) => {
@@ -37,17 +37,18 @@ const SignIn: React.FunctionComponent = () => {
           abortEarly: false,
         });
 
-        sigIn({
+        signIn({
           email: data.email,
           password: data.password,
         });
       } catch (err) {
-        const errors = getValidationErros(err);
-        formRef.current?.setErrors(errors);
-        console.error(errors);
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErros(err);
+          formRef.current?.setErrors(errors);
+        }
       }
     },
-    [sigIn],
+    [signIn],
   );
 
   return (

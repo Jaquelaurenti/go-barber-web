@@ -1,8 +1,7 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 export const Container = styled.div`
   position: relative;
-  
   span {
     background: #ff9020;
     padding: 8px;
@@ -24,7 +23,7 @@ export const Container = styled.div`
       content: '';
       border-style: solid;
       border-color: #ff9020 transparent;
-      border-width: 6px  6px 0 6px;
+      border-width: 6px 6px 0 6px;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
